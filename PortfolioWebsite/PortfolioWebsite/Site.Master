@@ -1,0 +1,113 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="PortfolioWebsite.SiteMaster" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajax" %>
+<%@ Register Src="~/Controls/AboutMe.ascx" TagName="AboutMe" TagPrefix="ctrl" %>
+<%@ Register Src="~/Controls/Experience.ascx" TagName="Experience" TagPrefix="ctrl" %>
+<%@ Register Src="~/Controls/Home.ascx" TagName="Home" TagPrefix="ctrl" %>
+<%@ Register Src="~/Controls/LookingFor.ascx" TagName="LookingFor" TagPrefix="ctrl" %>
+<%@ Register Src="~/Controls/Portfolio.ascx" TagName="Portfolio" TagPrefix="ctrl" %>
+<%@ Register Src="~/Controls/Resume.ascx" TagName="Resume" TagPrefix="ctrl" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <title>Nicholas Celiano | Portfolio</title>
+    <%--Icon--%>
+    <link href="App_Themes/Images/logo.ico" rel="shortcut icon" type="image/x-icon" />
+    <%--Styles--%>
+    <link href="App_Themes/Styles/Layout.css" rel="stylesheet" />
+    <link href="App_Themes/Styles/Header.css" rel="stylesheet" />
+    <link href="App_Themes/Styles/Menu.css" rel="stylesheet" />
+    <link href="App_Themes/Styles/Content.css" rel="stylesheet" />
+    <link href="App_Themes/Styles/Footer.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+    <%--Scripts--%>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" ></script>
+    <script src="App_Themes/Scripts/Script.js"></script>
+    <script src="App_Themes/Scripts/Menu.js"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-45165968-1', 'nicholasceliano.com');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body>
+    <form style="height:100% !important;min-height:100%;" runat="server">
+        <div class="header">
+            <img src="App_Themes/Images/logo.png" class="headerLogo" />
+            <div class="headerText">
+                <div class="headerContactInfo">
+                    <b>PHONE </b>(917)891-1841
+                    <br />
+                    <b>EMAIL </b>nicholasceliano@yahoo.com
+                </div>
+                <nav>
+                    <ul id="menu">
+                        <li id="itemLinkedIn"><a href="http://www.linkedin.com/pub/nicholas-celiano/4b/b82/104/‎" target="_blank" class="headerLinkedIn"></a></li>
+                        <li>Professional
+                            <div>
+                                <asp:LinkButton ID="lbExperience" runat="server" Text="Experience" OnClick="MenuItem_Click" />
+                                <asp:LinkButton ID="lbResume" runat="server" Text="Resume" OnClick="MenuItem_Click" />
+                            </div>
+                        </li>
+                        <li><asp:LinkButton ID="lbPortfolio" runat="server" Text="Portfolio" OnClick="MenuItem_Click" /></li>
+                        <li><asp:LinkButton ID="lbLookingFor" runat="server" Text="What I'm Looking For" OnClick="MenuItem_Click" /></li>
+                        <li><asp:LinkButton ID="lbAboutMe" runat="server" Text="About Me" OnClick="MenuItem_Click" /></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="content">
+            <ajax:ToolkitScriptManager ID="smPortfolio" runat="server" AsyncPostBackTimeout="0" />
+            <asp:Panel ID="pnlLoading" runat="server" CssClass="loading">
+                <img src="App_Themes/Images/loading.gif" />
+            </asp:Panel>
+            <ajax:ModalPopupExtender ID="modalExtender" runat="server" TargetControlID="uProg" PopupControlID="pnlLoading" Enabled="true" />
+            <asp:UpdateProgress ID="uProg" runat="server" DisplayAfter="100" AssociatedUpdatePanelID="uPnlContent" />
+            
+            <div style="text-align:center;font-weight:bold;">Under construction. Check Back Soon.</div>
+            <asp:UpdatePanel ID="uPnlContent" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <ctrl:AboutMe ID="ctrlAboutMe" runat="server" EnableViewState="false" Visible="false" />
+                    <ctrl:Experience ID="ctrlExperience" runat="server" EnableViewState="false" Visible="false" />
+                    <ctrl:Home ID="ctrlHome" runat="server" EnableViewState="false" Visible="false" />
+                    <ctrl:LookingFor ID="ctrlLookingFor" runat="server" EnableViewState="false" Visible="false" />
+                    <ctrl:Portfolio ID="ctrlPortfolio" runat="server" EnableViewState="false" Visible="false" />
+                    <ctrl:Resume ID="ctrlResume" runat="server" EnableViewState="false" Visible="false" />
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="lbExperience" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="lbResume" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="lbPortfolio" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="lbLookingFor" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="lbAboutMe" EventName="Click" />
+                </Triggers>
+            </asp:UpdatePanel>
+        </div>
+        <div class="footer">
+            Last Updated: Novemeber 1, 2013
+        </div>
+    </form>
+    <script type="text/javascript">
+        Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(showPopup);
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(hidePopup);
+
+        function showPopup(sender, args) {
+            var ModalControl = '<%= modalExtender.ClientID %>';
+            $find(ModalControl).show();
+        }
+
+        function hidePopup(sender, args) {
+            var ModalControl = '<%= modalExtender.ClientID %>';
+            $find(ModalControl).hide();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+﻿body {
+    margin:0;
+    height:100%;
+}
+
+.ResumePDF
+{
+    width:80%;
+    height:80%;
+    margin-left:10%;
+    margin-right:10%;
+    margin-top:3%
+}

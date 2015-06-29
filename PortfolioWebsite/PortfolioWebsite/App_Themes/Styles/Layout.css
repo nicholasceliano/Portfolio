@@ -1,0 +1,17 @@
+﻿html, body {
+    margin:0;
+    height:100%;
+    width:100%;
+    min-width:1000px;
+}
+
+*:focus
+{
+    outline:none;
+}
+
+.loading
+{
+    height:100%;
+    margin-top:115px;
+}

@@ -1,0 +1,48 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="WebApplication1.Site1" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title></title>
+    <link href="App_Themes/Styles/Layout.css" rel="stylesheet" />
+    <link href="App_Themes/Styles/Menu.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="App_Themes/Scripts/Script.js"></script>
+    <script src="App_Themes/Scripts/Menu.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <div style="height:100px;width:100%;background-color:lightgray;">
+            <nav>
+                
+                <ul id="menu">
+                    <li>Professional
+                        <div>
+                            <a href="Resume.aspx">Resume</a>
+                            <a href="Default.aspx">Projects</a>
+                        </div>
+                    </li>
+                    
+                    <li>Link2
+                        <div>
+                            <a>SubLink2</a>
+                        </div>
+                    </li>
+                    <li><a>Link3</a></li>
+                    <li><a>Link4</a></li>
+                </ul>
+            </nav>
+            
+        </div>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
